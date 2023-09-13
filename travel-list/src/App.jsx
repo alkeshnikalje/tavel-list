@@ -8,6 +8,7 @@ function App() {
   const [items, setItems] = useState([]);
 
   function handleOnAddItem(item) {
+    if (!item.description) return;
     setItems((items) => [...items, item]);
   }
 
@@ -23,6 +24,13 @@ function App() {
     );
   }
 
+  function handleClearList() {
+    const confirmed = window.confirm(
+      "are you sure you want to delete all items?"
+    );
+    if (confirmed) setItems([]);
+  }
+
   return (
     <div className="app">
       <Logo />
@@ -31,6 +39,7 @@ function App() {
         items={items}
         onAddItem={handleDeleteItem}
         onUpdateItem={handleUpdateItem}
+        onClearList={handleClearList}
       />
       <Stats items={items} />
     </div>
